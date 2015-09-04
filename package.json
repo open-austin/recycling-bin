@@ -1,0 +1,31 @@
+{
+  "name": "recycling-bin",
+  "version": "1.0.0",
+  "description": "recycling bin",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-austin/recycling-bin.git"
+  },
+  "keywords": [
+    "reduce",
+    "reuse",
+    "recycle"
+  ],
+  "author": "Open Austin",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/open-austin/recycling-bin/issues"
+  },
+  "homepage": "https://github.com/open-austin/recycling-bin#readme",
+  "dependencies": {
+    "babel": "^5.8.23",
+    "hapi": "^9.0.3",
+    "pg": "^4.4.1",
+    "pg-query": "^0.11.0"
+  }
+}
