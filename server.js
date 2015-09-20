@@ -9,6 +9,6 @@ server.connection({
 
 server.route(routes);
 
-server.start(() =>
-  console.log('Server running at:', server.info.uri)
-);
+server.start(function () {
+    console.log('Server running at:', server.info.uri);
+});
