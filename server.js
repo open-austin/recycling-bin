@@ -1,14 +1,14 @@
 const Hapi = require('hapi');
 const routes = require('./routes');
 const server = new Hapi.Server();
-
+const port = +process.env.PORT || 8000;
 server.connection({
-  host: 'localhost',
-  port: 8000
+  host: '0.0.0.0',
+  port: port
 });
 
 server.route(routes);
 
 server.start(function () {
-    console.log('Server running at:', server.info.uri);
+  console.log('Server listening on port', port);
 });
