@@ -8,3 +8,9 @@ CREATE TABLE locations (
    address text,
    reports jsonb
 );
+
+CREATE TABLE reports (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  location_id UUID references locations(id),
+  report text
+)

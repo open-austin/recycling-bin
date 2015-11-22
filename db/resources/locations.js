@@ -9,9 +9,18 @@ module.exports = {
     query.first('SELECT * FROM LOCATIONS WHERE ID = $1', [id], callback);
   },
 
+  search: function(address, callback) {
+    console.log(address + "%")
+    query.first('SELECT * FROM LOCATIONS WHERE ADDRESS LIKE $1', [address + "%"], callback);
+  },
+
   insert: function(data, callback) {
-    query.first('INSERT INTO LOCATIONS (name, coordinates, score, address, reports) VALUES ($1, $2, $3, $4, $5)',
-     [data.payload.name, data.payload.coordinates, data.payload.score, data.payload.address, data.payload.report], callback);
+    query('INSERT INTO LOCATIONS (name, coordinates, address) VALUES ($1, $2, $3) RETURNING ID',
+     [data.payload.name, data.payload.coordinates, data.payload.address],
+     function(err, rows, result){
+       query('INSERT INTO REPORTS (location_id, report) VALUES ($1, $2)', [rows[0].id,data.payload.report], callback);
+     }
+   );
     //callback(null, data);
   },
 
