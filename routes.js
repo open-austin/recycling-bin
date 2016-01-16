@@ -58,6 +58,16 @@ module.exports = [
     }
   },
   {
+    method: 'POST',
+    path: '/locations/{id}/reports',
+    handler: function(request, reply) {
+      db.reports.insert(request.params.id, request.payload.report, function(err, report) {
+        if (err) return reply('Unable to add reports').code(500);
+        return reply(report);
+      });
+    }
+  },
+  {
     method: 'GET',
     path: '/reports/{id}',
     handler: function(request, reply) {
