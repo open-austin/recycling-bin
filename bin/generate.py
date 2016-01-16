@@ -33,7 +33,7 @@ for num in range(1,100):
     for y in range(1, num_reports):
         reports.append(get_sentence())
 
-    query =  "INSERT INTO locations (coordinates, address, reports) VALUES (%s, %s, %s) RETURNING id;"
-    data = (coordinates, address, reports)
+    query =  "INSERT INTO locations (name, coordinates, address, reports  ) VALUES (%s, %s, %s, %s) RETURNING id;"
+    data = (address, coordinates, address, reports)
     cur.execute(query, data)
     con.commit()

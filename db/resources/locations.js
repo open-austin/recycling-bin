@@ -2,7 +2,7 @@ const query = require('pg-query');
 
 module.exports = {
   list: function(callback) {
-    query('SELECT name, coordinates, address, reports[1], array_length(reports, 1) FROM LOCATIONS', callback);
+    query('SELECT id, name, coordinates, address, reports[1], array_length(reports, 1) FROM LOCATIONS', callback);
   },
 
   get: function(id, callback) {
