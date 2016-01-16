@@ -10,6 +10,34 @@ Our goals for this fork are to build:
   - https://github.com/open-austin/recycling-bin/issues/1
 - Frontend that consumes the API. It should be just static files that can be hosted on GitHub pages.
 
+#### API
+
+The API exposes two resources, locations and reports. A location can have many reports
+
+Getting all locations
+
+```
+curl -X GET localhost:8080/locations
+```
+
+Getting a single location
+
+```
+curl -X GET localhost:8080/locations/{id}
+```
+
+Creating a location, with a report
+
+```
+curl -X POST localhost:8080/locations -d {"name": "Capitol Factory", "coordinates": "30.268748, -97.740364", "address": " 700 San Jacinto Blvd, Austin, TX 78701", "report": "Lorem ipsum dolor sit amet" }
+```
+
+Updating a location with a new report
+
+```
+curl -X PUT localhost:8080/locations/{id} -d {"report": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium"}
+```
+
 #### License
 
 Released to the public domain under [the Unlicense](http://unlicense.org/) by Open Austin, 2015.

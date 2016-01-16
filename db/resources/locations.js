@@ -10,7 +10,6 @@ module.exports = {
   },
 
   search: function(address, callback) {
-    console.log(address + "%")
     query.first('SELECT * FROM LOCATIONS WHERE ADDRESS LIKE $1', [address + "%"], callback);
   },
 
@@ -26,7 +25,7 @@ module.exports = {
 
   update: function(id, data, callback) {
     //TODO how should reports be stored?
-    query('UPDATE LOCATIONS SET score = score + $1 WHERE ID = $2',[data.payload.score, id], callback);
+    query('INSERT INTO REPORTS (location_id, report) VALUES ($1, $2)',[id, data.payload.report], callback);
     //callback(null, data);
   }
 };

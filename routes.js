@@ -48,7 +48,7 @@ module.exports = [
     }
   },
   {
-    method: 'POST',
+    method: 'PUT',
     path: '/locations/{id}',
     handler: function(request, reply) {
       db.locations.update(request.params.id, request, function(err, location) {
