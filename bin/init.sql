@@ -6,7 +6,7 @@ CREATE TABLE locations (
    coordinates point,
    score int,
    address text,
-   reports jsonb
+   reports text[]
 );
 
 CREATE TABLE reports (

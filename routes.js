@@ -32,7 +32,11 @@ module.exports = [
     handler: function(request, reply) {
       db.locations.get(request.params.id, function(err, location) {
         if (err) return reply('Unable to find location').code(500);
-        return reply(location);
+        const report = db.reports.get(request.params.id, function(err, report){
+          if(err) return reply('Unable to find report').code(500);
+          return report
+        });
+        return reply(location, report);
       });
     }
   },
@@ -41,7 +45,6 @@ module.exports = [
     path: '/locations',
     handler: function(request, reply) {
       db.locations.insert(request, function(err, location) {
-        console.log(err)
         if (err) return reply("Unable to add location").code(500);
         return reply(location);
       });
