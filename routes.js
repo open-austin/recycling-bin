@@ -41,7 +41,6 @@ module.exports = [
     path: '/locations',
     handler: function(request, reply) {
       db.locations.insert(request, function(err, location) {
-        console.log(err)
         if (err) return reply("Unable to add location").code(500);
         return reply(location);
       });
