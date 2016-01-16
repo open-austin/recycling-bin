@@ -2,11 +2,14 @@ const query = require('pg-query');
 
 module.exports = {
   list: function(callback) {
-    query('SELECT id, name, coordinates, address, reports[1], array_length(reports, 1) FROM LOCATIONS', callback);
+    query('SELECT * FROM LOCATIONS', callback);
   },
 
   get: function(id, callback) {
-    query.first('SELECT * FROM LOCATIONS WHERE ID = $1', [id], callback);
+    query.first('SELECT * FROM LOCATIONS WHERE ID = $1', [id],
+    function(err, result){
+    query('SELECT * FROM LOCATIONS WHERE ID = $1',[id], callback);}
+  );
   },
 
   search: function(address, callback) {
@@ -14,13 +17,18 @@ module.exports = {
   },
 
   insert: function(data, callback) {
-    query('INSERT INTO LOCATIONS (name, coordinates, address, reports) VALUES ($1, $2, $3, $4) RETURNING ID',
-     [data.payload.name, data.payload.coordinates, data.payload.address, data.payload.report], callback);
+    query('INSERT INTO LOCATIONS (name, coordinates, address) VALUES ($1, $2, $3) RETURNING ID',
+     [data.payload.name, data.payload.coordinates, data.payload.address],
+     function(err, rows, result){
+       query('INSERT INTO REPORTS (location_id, report) VALUES ($1, $2)', [rows[0].id,data.payload.report], callback);
+     }
+   );
     //callback(null, data);
   },
 
   update: function(id, data, callback) {
-    query('UPDATE LOCATIONS ( set reports = array_append(reports , $2) where ID = $1)',[id, data.payload.report], callback);
+    //TODO how should reports be stored?
+    query('INSERT INTO REPORTS (location_id, report) VALUES ($1, $2)',[id, data.payload.report], callback);
     //callback(null, data);
   }
 };

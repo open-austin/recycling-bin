@@ -32,11 +32,7 @@ module.exports = [
     handler: function(request, reply) {
       db.locations.get(request.params.id, function(err, location) {
         if (err) return reply('Unable to find location').code(500);
-        const report = db.reports.get(request.params.id, function(err, report){
-          if(err) return reply('Unable to find report').code(500);
-          return report
-        });
-        return reply(location, report);
+        return reply(location);
       });
     }
   },

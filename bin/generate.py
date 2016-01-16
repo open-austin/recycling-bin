@@ -28,12 +28,16 @@ for num in range(1,100):
     coordinates = str(xLat) + ", " + str(yLong)
     location = geolocator.reverse(coordinates)
     address = location.address
-    reports = []
+
+    query =  "INSERT INTO locations (coordinates, address) VALUES (%s, %s) RETURNING id;"
+    data = (coordinates, address)
+    cur.execute(query, data)
+    id = cur.fetchall()[0][0]
+    con.commit()
     num_reports = random.randint(1,5)
     for y in range(1, num_reports):
-        reports.append(get_sentence())
-
-    query =  "INSERT INTO locations (name, coordinates, address, reports  ) VALUES (%s, %s, %s, %s) RETURNING id;"
-    data = (address, coordinates, address, reports)
-    cur.execute(query, data)
-    con.commit()
+        sentence = get_sentence()
+        query2 = "INSERT INTO reports (location_id, report) VALUES (%s, %s)"
+        data = (id, sentence)
+        cur.execute(query2, data)
+        con.commit()
