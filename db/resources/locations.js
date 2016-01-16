@@ -6,10 +6,10 @@ module.exports = {
   },
 
   get: function(id, callback) {
-    query.first('SELECT * FROM LOCATIONS WHERE ID = $1', [id],
-    function(err, result){
-    query('SELECT * FROM LOCATIONS WHERE ID = $1',[id], callback);}
-  );
+    query.first(`SELECT *,
+      (select json_agg(r)
+        from (select id, report from reports where reports.location_id = locations.id) as r) as reports
+      FROM LOCATIONS WHERE ID = $1`, [id], callback);
   },
 
   search: function(address, callback) {
