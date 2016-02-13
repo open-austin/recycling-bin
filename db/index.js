@@ -7,3 +7,4 @@ module.exports = {
   locations: require('./resources/locations'),
   reports: require('./resources/reports')
 };
+console.log("Connected to db");
