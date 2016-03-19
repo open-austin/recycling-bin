@@ -26,10 +26,10 @@ Getting a single location
 curl -X GET localhost:8080/locations/{id}
 ```
 
-Creating a location, with a report
+Creating a location
 
 ```
-curl -X POST localhost:8080/locations -d {"name": "Capitol Factory", "coordinates": "30.268748, -97.740364", "address": " 700 San Jacinto Blvd, Austin, TX 78701", "report": "Lorem ipsum dolor sit amet" }
+curl http://localhost:8000/locations -H 'Content-Type: application/json' -d '{"name": "Capitol Factory", "coordinates": [30.268748, -97.740364], "address": "700 San Jacinto Blvd, Austin, TX 78701"}'
 ```
 
 Updating a location with a new report
