@@ -2,8 +2,7 @@ const query = require('pg-query');
 
 module.exports = {
   list: function(callback) {
-    query(`SELECT *,
-      (select COUNT(*) from reports where reports.location_id = locations.id) as reports_count FROM locations`, callback);
+    query(`SELECT * from locations`, callback);
   },
 
   get: function(id, callback) {
