@@ -20,7 +20,7 @@ module.exports = [
 
       } else {
       db.locations.list(function(err, locations) {
-	console.log("Listing locations");
+	      console.log("Listing locations");
         console.log(err)
         if (err) return reply('Unable to list locations').code(500);
         return reply({ locations: locations });
